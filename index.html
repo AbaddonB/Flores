@@ -8,7 +8,6 @@
         body {
             margin: 0;
             overflow: hidden;
-            /* Fondo mucho más oscuro, estilo cósmico/nocturno */
             background: linear-gradient(to bottom, #05010a, #0e0314, #1a0624); 
             height: 100vh;
             display: flex;
@@ -19,19 +18,18 @@
 
         .garden {
             position: relative;
-            width: 95%;
-            max-width: 1100px;
-            height: 65vh;
+            width: 100%;
+            height: 70vh;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 25px; /* Ajustado para que entren más flores */
             z-index: 10;
-            padding-bottom: 15px;
         }
 
+        /* Contenedor de cada flor, posicionado de forma absoluta para llenar la pantalla */
         .flower-container {
-            position: relative;
+            position: absolute;
+            bottom: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -39,144 +37,57 @@
             animation: sway 4s ease-in-out infinite alternate;
         }
 
+        /* Animación del tallo creciendo */
         .stem {
             width: 5px;
-            background: linear-gradient(to right, #1e3d1a, #32632b);
+            background: linear-gradient(to right, #1e3d1a, #32632b, #1e3d1a);
             border-radius: 4px;
-            /* El tallo también tiene un levísimo brillo verde nocturno */
-            filter: drop-shadow(0 0 2px rgba(50, 99, 43, 0.5));
+            filter: drop-shadow(0 0 3px rgba(50, 99, 43, 0.8));
+            height: 0; /* Empieza en 0 para la animación */
+            animation: growStem 2.5s ease-out forwards;
         }
 
+        @keyframes growStem {
+            100% { height: var(--stem-h); }
+        }
+
+        /* Animación de la flor abriéndose (Florecer) */
         .flower-svg {
             position: absolute;
             bottom: 100%;
-            width: 95px;
-            height: 95px;
+            width: 100px;
+            height: 100px;
             overflow: visible;
-            transform: translateY(15px);
-            /* EFECTO NEÓN: Doble capa de brillo para máxima intensidad */
-            filter: drop-shadow(0 0 8px #cc66ff) drop-shadow(0 0 20px #800080);
+            transform-origin: bottom center;
+            transform: scale(0); /* Empieza pequeña/invisible */
+            opacity: 0;
+            filter: drop-shadow(0 0 8px rgba(204, 102, 255, 0.6)) drop-shadow(0 0 15px rgba(128, 0, 128, 0.8));
+            animation: bloom 1.5s ease-out forwards;
+        }
+
+        @keyframes bloom {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         @keyframes sway {
-            0% { transform: rotate(-3deg); }
-            100% { transform: rotate(3deg); }
+            0% { transform: rotate(-4deg); }
+            100% { transform: rotate(4deg); }
         }
 
-        /* --- DISEÑO DE MENSAJES ESTILO VIDEO (FIJOS Y PULSANTES) --- */
-        .message-card {
+        /* Mensajes flotantes con estilo neón oscuro */
+        .message-bubble {
             position: absolute;
-            background: rgba(26, 6, 36, 0.75); /* Fondo oscuro traslúcido */
-            border: 2px solid #da70d6; /* Borde neón orquídea */
-            box-shadow: 0 0 12px #da70d6, inset 0 0 6px rgba(218, 112, 214, 0.4);
+            background: rgba(26, 6, 36, 0.6);
+            backdrop-filter: blur(5px);
+            border: 1px solid #da70d6;
+            box-shadow: 0 0 10px rgba(218, 112, 214, 0.5);
             color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 15px;
             font-weight: 500;
-            text-align: center;
-            z-index: 20;
-            animation: neonPulse 3s ease-in-out infinite alternate;
             white-space: nowrap;
-        }
-
-        @keyframes neonPulse {
-            0% { 
-                transform: scale(0.98); 
-                box-shadow: 0 0 8px #da70d6, inset 0 0 4px rgba(218, 112, 214, 0.3);
-                opacity: 0.85;
-            }
-            100% { 
-                transform: scale(1.02); 
-                box-shadow: 0 0 18px #ff66cc, inset 0 0 8px rgba(255, 102, 204, 0.5);
-                opacity: 1;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="message-card" style="top: 12%; left: 8%; animation-delay: 0s;">Admiro mucho lo duro que trabajas todos los días.</div>
-    <div class="message-card" style="top: 18%; right: 10%; animation-delay: 0.5s;">Qué bonito es verte tan enfocada en tus metas.</div>
-    <div class="message-card" style="top: 38%; left: 4%; animation-delay: 1s;">Eres súper inteligente, no hay reto que te gane.</div>
-    <div class="message-card" style="top: 45%; right: 5%; animation-delay: 1.5s;">Mucho trabajo, pero siempre te ves genial haciéndolo.</div>
-    <div class="message-card" style="bottom: 45%; left: 32%; animation-delay: 2s;">Trabajas muchísimo, hoy te toca sonreír a ti.</div>
-
-    <div class="garden">
-        
-        <div class="flower-container" style="animation-delay: 0s;">
-            <svg viewBox="0 0 100 100" class="flower-svg">
-                <circle cx="50" cy="45" r="25" fill="#4a0e3b"/>
-                <circle cx="43" cy="40" r="20" fill="#75155c"/>
-                <circle cx="57" cy="40" r="20" fill="#75155c"/>
-                <circle cx="50" cy="30" r="16" fill="#a31e81"/>
-                <circle cx="50" cy="35" r="10" fill="#d428a8"/>
-            </svg>
-            <div class="stem" style="height: 160px;"></div>
-        </div>
-
-        <div class="flower-container" style="animation-delay: 0.6s;">
-            <svg viewBox="0 0 100 100" class="flower-svg">
-                <g transform="translate(50,45)">
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#b978eb" transform="rotate(0)"/>
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#d9adff" transform="rotate(72)"/>
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#b978eb" transform="rotate(144)"/>
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#d9adff" transform="rotate(216)"/>
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#b978eb" transform="rotate(288)"/>
-                    <circle cx="0" cy="0" r="5" fill="#ffea00"/>
-                </g>
-            </svg>
-            <div class="stem" style="height: 230px;"></div>
-        </div>
-
-        <div class="flower-container" style="animation-delay: 1.2s;">
-            <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg"></svg>
-            <div class="stem" style="height: 180px;"></div>
-        </div>
-
-        <div class="flower-container" style="animation-delay: 0.3s;">
-            <svg viewBox="0 0 100 100" class="flower-svg">
-                <circle cx="50" cy="45" r="25" fill="#3a062e"/>
-                <circle cx="43" cy="40" r="20" fill="#661050"/>
-                <circle cx="57" cy="40" r="20" fill="#661050"/>
-                <circle cx="50" cy="30" r="16" fill="#941374"/>
-                <circle cx="50" cy="35" r="10" fill="#c71c9e"/>
-            </svg>
-            <div class="stem" style="height: 260px;"></div>
-        </div>
-
-        <div class="flower-container" style="animation-delay: 1.5s;">
-            <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg"></svg>
-            <div class="stem" style="height: 200px;"></div>
-        </div>
-
-        <div class="flower-container" style="animation-delay: 0.9s;">
-            <svg viewBox="0 0 100 100" class="flower-svg">
-                <g transform="translate(50,45)">
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#9932cc" transform="rotate(0)"/>
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#da70d6" transform="rotate(72)"/>
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#9932cc" transform="rotate(144)"/>
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#da70d6" transform="rotate(216)"/>
-                    <path d="M0,0 C12,-20 12,-45 0,-55 C-12,-45 -12,-20 0,0" fill="#9932cc" transform="rotate(288)"/>
-                    <circle cx="0" cy="0" r="5" fill="#ffea00"/>
-                </g>
-            </svg>
-            <div class="stem" style="height: 140px;"></div>
-        </div>
-
-    </div>
-
-    <script>
-        // Generación automática para todas las dalias presentes en el jardín
-        const dahlias = document.querySelectorAll('.dahlia-svg');
-        dahlias.forEach(dahlia => {
-            let dahliaHTML = '<g transform="translate(50,45)">';
-            for(let i=0; i<12; i++) { dahliaHTML += `<path d="M0,0 L6,-20 L0,-35 L-6,-20 Z" fill="#5c1380" transform="rotate(${i * 30})"/>`; }
-            for(let i=0; i<10; i++) { dahliaHTML += `<path d="M0,0 L5,-15 L0,-25 L-5,-15 Z" fill="#9c27b0" transform="rotate(${i * 36 + 15})"/>`; }
-            for(let i=0; i<8; i++) { dahliaHTML += `<path d="M0,0 L3,-8 L0,-15 L-3,-8 Z" fill="#e1bee7" transform="rotate(${i * 45})"/>`; }
-            dahliaHTML += '<circle cx="0" cy="0" r="4" fill="#ffeb3b"/></g>';
-            dahlia.innerHTML = dahliaHTML;
-        });
-    </script>
-</body>
-</html>
+            opacity: 0;
+            z
