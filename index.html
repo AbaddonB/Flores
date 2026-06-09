@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Felicidades, Doctora!</title>
+    <title>¡Felicidades, Dra. Daphne!</title>
     <style>
         body {
             margin: 0;
@@ -104,6 +104,7 @@
 
     <div class="bouquet-container">
         
+        <!-- CAPA FONDO (Altas) -->
         <div class="flower-wrapper" style="--base-angle: -35deg; --stem-h: 300px; --delay: 0.2s;">
             <div class="stem"></div>
             <svg viewBox="0 0 100 100" class="flower-svg" style="width: 100px; height: 100px;">
@@ -146,6 +147,7 @@
             </svg>
         </div>
 
+        <!-- CAPA MEDIA -->
         <div class="flower-wrapper" style="--base-angle: -20deg; --stem-h: 380px; --delay: 1.0s;">
             <div class="stem"></div>
             <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 120px; height: 120px;"></svg>
@@ -176,6 +178,7 @@
             <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 90px; height: 90px;"></svg>
         </div>
 
+        <!-- CAPA FRONTAL (Flores de relleno en medio) -->
         <div class="flower-wrapper" style="--base-angle: -28deg; --stem-h: 270px; --delay: 1.1s;">
             <div class="stem"></div>
             <svg viewBox="0 0 100 100" class="flower-svg rose-svg" style="width: 95px; height: 95px;"></svg>
@@ -222,7 +225,6 @@
     </div>
 
     <script>
-        // Generación de Dalias reescrita para no recortarse
         const dahlias = document.querySelectorAll('.dahlia-svg');
         dahlias.forEach(dahlia => {
             let dahliaHTML = '<g transform="translate(50,50)">';
@@ -234,7 +236,6 @@
             dahlia.innerHTML = dahliaHTML;
         });
 
-        // NUEVO: Generación de Rosas mejoradas con pétalos superpuestos
         const roses = document.querySelectorAll('.rose-svg');
         roses.forEach(rose => {
             rose.innerHTML = `
@@ -254,18 +255,18 @@
             `;
         });
 
-        // Mensajes coquetos enfocados en inteligencia y belleza
+        // --- MENSAJES PERSONALIZADOS PARA DAPHNE ---
         const messages = [
-            "Eres tan linda como inteligente. ¡Felicidades!",
-            "Una chica súper lista que acaba de cumplir su sueño.",
+            "Eres tan linda como inteligente. ¡Felicidades, Daphne!",
             "La medicina acaba de ganar a una doctora maravillosa.",
-            "Felicidades, doc. Tienes una mente brillante.",
+            "Con esa bata y tu inteligencia, te ves espectacular.",
+            "Esa sonrisa te queda maravillosa, Daphne.",
             "Belleza e inteligencia en una sola doctora.",
             "Me encanta lo lista y dedicada que eres.",
-            "Te ves espectacular triunfando así.",
+            "Felicidades, Dra. Daphne. Tienes una mente brillante.",
             "Eres una mujer increíble, de verdad.",
-            "Felicidades por este paso, guapa.",
-            "Con esa sonrisa y tu inteligencia, conquistas todo."
+            "Felicidades por este gran paso, guapa.",
+            "Con tu inteligencia y esa sonrisa, conquistas todo, Daphne."
         ];
 
         const container = document.getElementById('messages-container');
