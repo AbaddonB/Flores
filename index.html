@@ -23,6 +23,8 @@
             display: flex;
             justify-content: center;
             z-index: 10;
+            /* Punto de anclaje para el escalado responsivo */
+            transform-origin: bottom center;
         }
 
         .flower-wrapper {
@@ -79,11 +81,13 @@
             border: 1px solid #da70d6;
             box-shadow: 0 0 12px rgba(218, 112, 214, 0.4);
             color: #f8f0ff;
-            padding: 12px 24px;
+            padding: 12px 20px;
             border-radius: 25px;
-            font-size: 15px;
+            /* Tamaño de fuente responsivo para celulares */
+            font-size: clamp(13px, 3.5vw, 15px);
             font-weight: 500;
-            white-space: nowrap;
+            text-align: center;
+            max-width: 85vw; /* Evita que los mensajes muy largos se salgan de la pantalla */
             opacity: 0;
             z-index: 100; 
             pointer-events: none;
@@ -102,7 +106,7 @@
 
     <div id="messages-container"></div>
 
-    <div class="bouquet-container">
+    <div class="bouquet-container" id="bouquet">
         
         <!-- CAPA FONDO (Altas) -->
         <div class="flower-wrapper" style="--base-angle: -35deg; --stem-h: 300px; --delay: 0.2s;">
@@ -225,6 +229,24 @@
     </div>
 
     <script>
+        // --- ESCALADO RESPONSIVO ---
+        // Calcula la escala adecuada dependiendo del ancho y alto de la pantalla
+        function resizeBouquet() {
+            const bouquet = document.getElementById('bouquet');
+            // Medidas base (pantallas grandes)
+            const scaleX = window.innerWidth / 750;
+            const scaleY = window.innerHeight / 750;
+            // Toma el valor más pequeño para asegurar que no se corte por ningún lado, con un máximo de escala de 1
+            const scale = Math.min(1, scaleX, scaleY);
+            bouquet.style.transform = `scale(${scale})`;
+        }
+
+        // Ejecutar al inicio y cada vez que cambie el tamaño de la ventana (o rote el celular)
+        window.addEventListener('resize', resizeBouquet);
+        resizeBouquet();
+
+
+        // --- GENERACIÓN DE FLORES ---
         const dahlias = document.querySelectorAll('.dahlia-svg');
         dahlias.forEach(dahlia => {
             let dahliaHTML = '<g transform="translate(50,50)">';
@@ -255,8 +277,9 @@
             `;
         });
 
-        // --- MENSAJES PERSONALIZADOS PARA DAPHNE ---
-        const messages = [
+
+        // --- SISTEMA INTELIGENTE DE MENSAJES (No Repeticiones) ---
+        const allMessages = [
             "Eres tan linda como inteligente. ¡Felicidades, Daphne!",
             "La medicina acaba de ganar a una doctora maravillosa.",
             "Con esa bata y tu inteligencia, te ves espectacular.",
@@ -269,14 +292,26 @@
             "Con tu inteligencia y esa sonrisa, conquistas todo, Daphne."
         ];
 
+        let availableMessages = [...allMessages]; // Bolsa de mensajes disponibles
         const container = document.getElementById('messages-container');
 
         function spawnMessage() {
+            // Si ya salieron todos los mensajes, vuelve a llenar la bolsa
+            if (availableMessages.length === 0) {
+                availableMessages = [...allMessages];
+            }
+
+            // Elegir uno aleatorio de los que quedan en la bolsa
+            const randomIndex = Math.floor(Math.random() * availableMessages.length);
+            // Extraer el mensaje elegido de la bolsa para que no se repita
+            const selectedText = availableMessages.splice(randomIndex, 1)[0];
+
             const msgElement = document.createElement('div');
             msgElement.className = 'message-bubble';
-            msgElement.innerText = messages[Math.floor(Math.random() * messages.length)];
+            msgElement.innerText = selectedText;
             
-            const randomX = Math.floor(Math.random() * 60) + 10;
+            // Posicionamiento más seguro para que no se salga de los bordes laterales
+            const randomX = Math.floor(Math.random() * 50) + 5; 
             msgElement.style.left = `${randomX}%`;
             
             const duration = Math.floor(Math.random() * 6) + 12;
