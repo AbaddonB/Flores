@@ -16,26 +16,23 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Contenedor central del ramo */
         .bouquet-container {
             position: absolute;
-            bottom: -30px; /* Oculta la base de los tallos fuera de la pantalla */
+            bottom: -30px; 
             left: 50%;
             display: flex;
             justify-content: center;
             z-index: 10;
         }
 
-        /* Cada flor individual con su ángulo de inclinación */
         .flower-wrapper {
             position: absolute;
             bottom: 0;
-            left: -2.5px; /* Centra el tallo de 5px */
+            left: -2.5px; 
             transform-origin: bottom center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* El balanceo respeta el ángulo base del ramo */
             animation: sway 4s ease-in-out infinite alternate;
         }
 
@@ -44,7 +41,6 @@
             100% { transform: rotate(calc(var(--base-angle) + 2.5deg)); }
         }
 
-        /* Tallos creciendo */
         .stem {
             width: 5px;
             background: linear-gradient(to top, #081706, #1b3d16, #2d6325);
@@ -59,11 +55,10 @@
             100% { height: var(--stem-h); }
         }
 
-        /* El SVG de la flor */
         .flower-svg {
             position: absolute;
             bottom: 100%;
-            margin-bottom: -50px; /* MAGIA: Alinea el centro (50,50) exacto con la punta del tallo */
+            margin-bottom: -50px; 
             opacity: 0;
             transform-origin: center center;
             transform: scale(0);
@@ -72,13 +67,11 @@
             animation-delay: calc(var(--delay) + 1.8s);
         }
 
-        /* Animación de florecer, contrarrestando un poco la rotación del tallo para que miren arriba */
         @keyframes bloom {
             0% { transform: scale(0) rotate(calc(var(--base-angle) * -0.4)); opacity: 0; }
             100% { transform: scale(1) rotate(calc(var(--base-angle) * -0.4)); opacity: 1; }
         }
 
-        /* Estilo de los mensajes */
         .message-bubble {
             position: absolute;
             background: rgba(20, 4, 28, 0.75);
@@ -92,7 +85,7 @@
             font-weight: 500;
             white-space: nowrap;
             opacity: 0;
-            z-index: 100; /* Asegura que estén por encima de las flores */
+            z-index: 100; 
             pointer-events: none;
             animation: floatUp linear forwards;
         }
@@ -111,136 +104,125 @@
 
     <div class="bouquet-container">
         
-        <!-- Flor 1 (Exterior Izquierda) -->
-        <div class="flower-wrapper" style="--base-angle: -40deg; --stem-h: 200px; --delay: 0.2s;">
+        <div class="flower-wrapper" style="--base-angle: -35deg; --stem-h: 300px; --delay: 0.2s;">
             <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 85px; height: 85px;"></svg>
-        </div>
-
-        <!-- Flor 2 -->
-        <div class="flower-wrapper" style="--base-angle: -30deg; --stem-h: 280px; --delay: 0.6s;">
-            <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 110px; height: 110px;">
+            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 100px; height: 100px;">
                 <g transform="translate(50,50)">
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#9932cc" transform="rotate(0)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#da70d6" transform="rotate(72)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#9932cc" transform="rotate(144)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#da70d6" transform="rotate(216)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#9932cc" transform="rotate(288)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#9932cc" transform="rotate(0)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#da70d6" transform="rotate(72)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#9932cc" transform="rotate(144)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#da70d6" transform="rotate(216)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#9932cc" transform="rotate(288)"/>
                     <circle cx="0" cy="0" r="6" fill="#ffea00"/>
                 </g>
             </svg>
         </div>
 
-        <!-- Flor 3 (Rosa Gigante) -->
-        <div class="flower-wrapper" style="--base-angle: -18deg; --stem-h: 360px; --delay: 1.0s;">
+        <div class="flower-wrapper" style="--base-angle: 35deg; --stem-h: 280px; --delay: 0.4s;">
             <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 140px; height: 140px;">
-                <path d="M50,50 Q30,35 35,65 Q50,55 50,50" fill="#2d5a27"/>
-                <path d="M50,50 Q70,35 65,65 Q50,55 50,50" fill="#2d5a27"/>
-                <circle cx="50" cy="50" r="25" fill="#3a062e"/>
-                <circle cx="43" cy="45" r="20" fill="#661050"/>
-                <circle cx="57" cy="45" r="20" fill="#661050"/>
-                <circle cx="50" cy="35" r="16" fill="#941374"/>
-                <circle cx="50" cy="40" r="10" fill="#c71c9e"/>
+            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 90px; height: 90px;">
+                <g transform="translate(50,50)">
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(0)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#e0c3fc" transform="rotate(72)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(144)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#e0c3fc" transform="rotate(216)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(288)"/>
+                    <circle cx="0" cy="0" r="6" fill="#ffea00"/>
+                </g>
             </svg>
         </div>
 
-        <!-- Flor 4 -->
-        <div class="flower-wrapper" style="--base-angle: -8deg; --stem-h: 420px; --delay: 0.4s;">
+        <div class="flower-wrapper" style="--base-angle: 0deg; --stem-h: 460px; --delay: 0.8s;">
+            <div class="stem"></div>
+            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 140px; height: 140px;">
+                <g transform="translate(50,50)">
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(0)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#e0c3fc" transform="rotate(72)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(144)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#e0c3fc" transform="rotate(216)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(288)"/>
+                    <circle cx="0" cy="0" r="6" fill="#ffea00"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="flower-wrapper" style="--base-angle: -20deg; --stem-h: 380px; --delay: 1.0s;">
+            <div class="stem"></div>
+            <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 120px; height: 120px;"></svg>
+        </div>
+
+        <div class="flower-wrapper" style="--base-angle: 20deg; --stem-h: 360px; --delay: 0.5s;">
             <div class="stem"></div>
             <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 110px; height: 110px;"></svg>
         </div>
 
-        <!-- Flor 5 (Lirio Central Alto) -->
-        <div class="flower-wrapper" style="--base-angle: 0deg; --stem-h: 470px; --delay: 0.8s;">
+        <div class="flower-wrapper" style="--base-angle: -10deg; --stem-h: 390px; --delay: 1.2s;">
             <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 150px; height: 150px;">
+            <svg viewBox="0 0 100 100" class="flower-svg rose-svg" style="width: 130px; height: 130px;"></svg>
+        </div>
+
+        <div class="flower-wrapper" style="--base-angle: 10deg; --stem-h: 370px; --delay: 0.7s;">
+            <div class="stem"></div>
+            <svg viewBox="0 0 100 100" class="flower-svg rose-svg" style="width: 125px; height: 125px;"></svg>
+        </div>
+
+        <div class="flower-wrapper" style="--base-angle: -42deg; --stem-h: 200px; --delay: 0.3s;">
+            <div class="stem"></div>
+            <svg viewBox="0 0 100 100" class="flower-svg rose-svg" style="width: 85px; height: 85px;"></svg>
+        </div>
+
+        <div class="flower-wrapper" style="--base-angle: 42deg; --stem-h: 190px; --delay: 0.9s;">
+            <div class="stem"></div>
+            <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 90px; height: 90px;"></svg>
+        </div>
+
+        <div class="flower-wrapper" style="--base-angle: -28deg; --stem-h: 270px; --delay: 1.1s;">
+            <div class="stem"></div>
+            <svg viewBox="0 0 100 100" class="flower-svg rose-svg" style="width: 95px; height: 95px;"></svg>
+        </div>
+
+        <div class="flower-wrapper" style="--base-angle: 28deg; --stem-h: 250px; --delay: 0.6s;">
+            <div class="stem"></div>
+            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 105px; height: 105px;">
                 <g transform="translate(50,50)">
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#b978eb" transform="rotate(0)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#e0c3fc" transform="rotate(72)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#b978eb" transform="rotate(144)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#e0c3fc" transform="rotate(216)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#b978eb" transform="rotate(288)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#9932cc" transform="rotate(0)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#da70d6" transform="rotate(72)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#9932cc" transform="rotate(144)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#da70d6" transform="rotate(216)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#9932cc" transform="rotate(288)"/>
                     <circle cx="0" cy="0" r="6" fill="#ffea00"/>
                 </g>
             </svg>
         </div>
 
-        <!-- Flor 6 (Rosa Central) -->
-        <div class="flower-wrapper" style="--base-angle: 8deg; --stem-h: 400px; --delay: 1.2s;">
+        <div class="flower-wrapper" style="--base-angle: 0deg; --stem-h: 240px; --delay: 1.3s;">
             <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 130px; height: 130px;">
-                <path d="M50,50 Q30,35 35,65 Q50,55 50,50" fill="#2d5a27"/>
-                <path d="M50,50 Q70,35 65,65 Q50,55 50,50" fill="#2d5a27"/>
-                <circle cx="50" cy="50" r="26" fill="#4a0e3b"/>
-                <circle cx="40" cy="45" r="22" fill="#75155c"/>
-                <circle cx="60" cy="45" r="22" fill="#75155c"/>
-                <circle cx="50" cy="35" r="18" fill="#a31e81"/>
-                <circle cx="50" cy="40" r="12" fill="#d428a8"/>
-            </svg>
+            <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 85px; height: 85px;"></svg>
         </div>
 
-        <!-- Flor 7 -->
-        <div class="flower-wrapper" style="--base-angle: 18deg; --stem-h: 330px; --delay: 0.5s;">
-            <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 125px; height: 125px;"></svg>
-        </div>
-
-        <!-- Flor 8 -->
-        <div class="flower-wrapper" style="--base-angle: 28deg; --stem-h: 260px; --delay: 0.9s;">
-            <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 100px; height: 100px;">
-                <g transform="translate(50,50)">
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#9932cc" transform="rotate(0)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#da70d6" transform="rotate(72)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#9932cc" transform="rotate(144)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#da70d6" transform="rotate(216)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#9932cc" transform="rotate(288)"/>
-                    <circle cx="0" cy="0" r="6" fill="#ffea00"/>
-                </g>
-            </svg>
-        </div>
-
-        <!-- Flor 9 (Rosa Pequeña Exterior) -->
-        <div class="flower-wrapper" style="--base-angle: 38deg; --stem-h: 180px; --delay: 0.3s;">
+        <div class="flower-wrapper" style="--base-angle: -12deg; --stem-h: 210px; --delay: 0.5s;">
             <div class="stem"></div>
             <svg viewBox="0 0 100 100" class="flower-svg" style="width: 80px; height: 80px;">
-                <path d="M50,50 Q30,35 35,65 Q50,55 50,50" fill="#2d5a27"/>
-                <path d="M50,50 Q70,35 65,65 Q50,55 50,50" fill="#2d5a27"/>
-                <circle cx="50" cy="50" r="22" fill="#3a062e"/>
-                <circle cx="43" cy="45" r="18" fill="#661050"/>
-                <circle cx="57" cy="45" r="18" fill="#661050"/>
-                <circle cx="50" cy="35" r="14" fill="#941374"/>
-                <circle cx="50" cy="40" r="8" fill="#c71c9e"/>
-            </svg>
-        </div>
-
-        <!-- Flor 10 (Relleno medio) -->
-        <div class="flower-wrapper" style="--base-angle: -24deg; --stem-h: 240px; --delay: 0.7s;">
-            <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg dahlia-svg" style="width: 75px; height: 75px;"></svg>
-        </div>
-
-        <!-- Flor 11 (Relleno derecho) -->
-        <div class="flower-wrapper" style="--base-angle: 22deg; --stem-h: 210px; --delay: 1.1s;">
-            <div class="stem"></div>
-            <svg viewBox="0 0 100 100" class="flower-svg" style="width: 90px; height: 90px;">
-                 <g transform="translate(50,50)">
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#b978eb" transform="rotate(0)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#e0c3fc" transform="rotate(72)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#b978eb" transform="rotate(144)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#e0c3fc" transform="rotate(216)"/>
-                    <path d="M0,0 C15,-25 15,-50 0,-60 C-15,-50 -15,-25 0,0" fill="#b978eb" transform="rotate(288)"/>
+                <g transform="translate(50,50)">
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(0)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#e0c3fc" transform="rotate(72)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(144)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#e0c3fc" transform="rotate(216)"/>
+                    <path d="M0,0 C15,-15 15,-35 0,-45 C-15,-35 -15,-15 0,0" fill="#b978eb" transform="rotate(288)"/>
                     <circle cx="0" cy="0" r="6" fill="#ffea00"/>
                 </g>
             </svg>
+        </div>
+
+        <div class="flower-wrapper" style="--base-angle: 15deg; --stem-h: 200px; --delay: 1.4s;">
+            <div class="stem"></div>
+            <svg viewBox="0 0 100 100" class="flower-svg rose-svg" style="width: 75px; height: 75px;"></svg>
         </div>
 
     </div>
 
     <script>
-        // Generación de Dalias reescrita para estar centrada exactamente en 50,50
+        // Generación de Dalias reescrita para no recortarse
         const dahlias = document.querySelectorAll('.dahlia-svg');
         dahlias.forEach(dahlia => {
             let dahliaHTML = '<g transform="translate(50,50)">';
@@ -252,18 +234,38 @@
             dahlia.innerHTML = dahliaHTML;
         });
 
-        // Mensajes
+        // NUEVO: Generación de Rosas mejoradas con pétalos superpuestos
+        const roses = document.querySelectorAll('.rose-svg');
+        roses.forEach(rose => {
+            rose.innerHTML = `
+                <path d="M50,50 Q30,35 35,65 Q50,55 50,50" fill="#2d5a27"/>
+                <path d="M50,50 Q70,35 65,65 Q50,55 50,50" fill="#2d5a27"/>
+                <circle cx="50" cy="50" r="28" fill="#3a062e"/>
+                <circle cx="50" cy="32" r="15" fill="#5c0a46"/>
+                <circle cx="66" cy="59" r="15" fill="#5c0a46"/>
+                <circle cx="34" cy="59" r="15" fill="#5c0a46"/>
+                <circle cx="59" cy="39" r="12" fill="#8a1068"/>
+                <circle cx="41" cy="39" r="12" fill="#8a1068"/>
+                <circle cx="50" cy="62" r="12" fill="#8a1068"/>
+                <circle cx="50" cy="46" r="8" fill="#c71c9e"/>
+                <circle cx="56" cy="53" r="8" fill="#c71c9e"/>
+                <circle cx="44" cy="53" r="8" fill="#c71c9e"/>
+                <circle cx="50" cy="50" r="4" fill="#ffb3e6"/>
+            `;
+        });
+
+        // Mensajes coquetos enfocados en inteligencia y belleza
         const messages = [
-            "¡Felicidades por tu logro! Todo tu esfuerzo rindió frutos.",
-            "Eres alguien increíblemente fuerte e inspiradora.",
+            "Eres tan linda como inteligente. ¡Felicidades!",
+            "Una chica súper lista que acaba de cumplir su sueño.",
             "La medicina acaba de ganar a una doctora maravillosa.",
-            "Tantas desveladas por fin valieron la pena. ¡Lo lograste!",
-            "Con esa bata y tu inteligencia, te ves espectacular.",
-            "Admiro tu dedicación, eres una mujer imparable.",
-            "Qué orgullo verte alcanzar este sueño.",
-            "Eres súper lista, no había duda de que lo ibas a lograr.",
-            "Felicidades, doc. Tu pasión es de las cosas que más admiro.",
-            "Mucho éxito en todo lo que viene, te lo mereces."
+            "Felicidades, doc. Tienes una mente brillante.",
+            "Belleza e inteligencia en una sola doctora.",
+            "Me encanta lo lista y dedicada que eres.",
+            "Te ves espectacular triunfando así.",
+            "Eres una mujer increíble, de verdad.",
+            "Felicidades por este paso, guapa.",
+            "Con esa sonrisa y tu inteligencia, conquistas todo."
         ];
 
         const container = document.getElementById('messages-container');
@@ -273,8 +275,7 @@
             msgElement.className = 'message-bubble';
             msgElement.innerText = messages[Math.floor(Math.random() * messages.length)];
             
-            // Aparecen aleatoriamente entre el lado izquierdo y derecho sin tocar bordes
-            const randomX = Math.floor(Math.random() * 70) + 10;
+            const randomX = Math.floor(Math.random() * 60) + 10;
             msgElement.style.left = `${randomX}%`;
             
             const duration = Math.floor(Math.random() * 6) + 12;
@@ -287,7 +288,6 @@
             }, duration * 1000);
         }
 
-        // Comienza a mostrar mensajes después de que crece el ramo
         setTimeout(() => {
             spawnMessage();
             setInterval(spawnMessage, 4500);
